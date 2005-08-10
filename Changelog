@@ -1,0 +1,10 @@
+$Id: Changelog 2005/08/10 16:02 $
+
+version 0.14 (2005/08/10):
+
+	- getmonths() results are now enforced to be consistent
+
+version 0.13 (2003/10/02):
+
+	- started changelog
+	- fixed a bug which prevented access to messages with ID 1000+
