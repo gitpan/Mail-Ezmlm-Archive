@@ -1,5 +1,5 @@
 # ===========================================================================
-# Archive.pm - version 0.13 - 02 Oct 2003
+# Archive.pm - version 0.15 - 29 Aug 2005
 #
 # Object methods for ezmlm-idx archives
 #
@@ -42,7 +42,7 @@ use strict;
 use vars qw($VERSION *MONTHS);
 require 5.002;
 
-$VERSION = '0.14';
+$VERSION = '0.15';
 
 %MONTHS = ( Jan => 1, Feb => 2, Mar => 3, Apr => 4, May => 5, Jun => 6,
 			Jul => 7, Aug => 8, Sep => 9, Oct => 10, Nov => 11, Dec => 12 );
@@ -76,7 +76,7 @@ sub nocache {
 sub getmonths {
 	my $self = shift;
 	opendir(THREADS, $self->{LIST_PATH} . '/archive/threads');
-	my @months = grep { !/^\d{6}$/ } readdir(THREADS);
+	my @months = grep /^\d{6}$/, readdir(THREADS);
 	closedir(THREADS);
 	return sort(@months);
 }
