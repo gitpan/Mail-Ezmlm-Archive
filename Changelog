@@ -1,4 +1,8 @@
-$Id: Changelog 2005/08/29 18:32 $
+$Id: Changelog 2005/10/28 18:15 $
+
+version 0.16 (2005/10/28):
+
+	- now getmessage() returns undef if message doesn't exist
 
 version 0.15 (2005/08/29):
 

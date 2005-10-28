@@ -1,5 +1,5 @@
 # ===========================================================================
-# Archive.pm - version 0.15 - 29 Aug 2005
+# Mail::Ezmlm::Archive
 #
 # Object methods for ezmlm-idx archives
 #
@@ -42,7 +42,7 @@ use strict;
 use vars qw($VERSION *MONTHS);
 require 5.002;
 
-$VERSION = '0.15';
+$VERSION = '0.16';
 
 %MONTHS = ( Jan => 1, Feb => 2, Mar => 3, Apr => 4, May => 5, Jun => 6,
 			Jul => 7, Aug => 8, Sep => 9, Oct => 10, Nov => 11, Dec => 12 );
@@ -126,6 +126,7 @@ sub getmessage {
 	$message = sprintf("%03u", $message);
 	$message =~ m/^(\d+)(\d{2})$/;
 	my ($a, $b) = ($1, $2);
+	return undef unless (-e $self->{LIST_PATH} . "/archive/$a/$b");
 	my @lines = $self->_get_file($self->{LIST_PATH} . "/archive/$a/$b");
 	my $date = $self->_get_date(1*$message);
 	$date =~ m/\s([A-Z][a-z]{2})\s(\d{4})/;
@@ -277,6 +278,10 @@ Full value of the 'From:' line
 =head2 Retrieving a message
 
 	$message = $archive->getmessage('52');
+
+This method returns a reference to a hash with two keys: text and month. The first
+contains the full raw message, and the message contains the month in YYYYMM format.
+It returns undef if the message doesn't exist.
 
 =head1 CACHING
 
